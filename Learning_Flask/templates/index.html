@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Home page</title>
+    </head>
+    <body>
+        <header>
+            <h1>Welcome to Terra Nova Home page!</h1>
+            <!-- <p>Hello {{content}}!</p>
+            {% for x in range(11)%}
+                {% if x % 2 == 0 %}
+                <p>{{x}}</p>
+                {% endif %}
+            {% endfor %} -->
+            {% for x in content %}
+                {% if x == 'Ashwin' or x == 'Sairam' %}
+                    <p>Person: {{x}}</p>
+                    <p>Admin: GoodBye Annoying guy!</p>
+                {% elif x == 'Menaga' %}
+                    <p>Person: {{x}}</p>
+                    <p>Admin: How are you Grandma?</p>
+                {% else %}
+                    <p>Person: {{x}}</p>
+                    <p>Admin: Hello {{x}}!</p>
+                {% endif %}
+            {% endfor %}
+        </header>
+    </body>
+</html>

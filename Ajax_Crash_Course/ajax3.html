@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax 3 - External API</title>
+    <style>
+        .user{
+            display: flex;
+            background: #f4f4f4;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .user ul{
+            list-style: none;
+        }
+    </style>
+</head>
+<body>
+    <button id="button">Get Github Users</button>
+    <br><br>
+    <h1>Github Users</h1>
+    <div id="users"></div>
+
+    <script>
+        document.getElementById("button").addEventListener('click', load_text);
+
+        function load_text() {
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', 'https://api.github.com/users', true);
+
+            xhr.onload = function() {
+                if(this.status == 200) {
+                    var users = JSON.parse(this.responseText);
+
+                    let output = '';
+
+                    users.forEach(user => {
+                        output += `
+                        <div class="user">
+                            <img src="${user.avatar_url}" width="70" height="70">
+                            <ul>
+                                <li>Id: ${user.id}</li>
+                                <li>Login: ${user.login}</li>
+                            </ul>
+                        </div>
+                        `;
+                    });
+                    document.getElementById('users').innerHTML = output
+                }else if(this.status == 404) {
+                    document.getElementById('users').innerHTML = 'File Not Found'
+                }
+            }
+
+            xhr.send();
+        }
+    </script>
+</body>
+</html>
